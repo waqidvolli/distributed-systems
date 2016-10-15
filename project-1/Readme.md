@@ -1,19 +1,22 @@
-*The kvserver is located in distributed-systems/project-1/kvserver
+Install thrift dependency for each kvserver and kvclient:
 
 
-*The kvclient is located in distributed-systems/project-1/kvclient
+```npm install```
 
 
-For each of the above, go to the respective folder and run:
-```npm install``` to install thrift dependencies.
-
-
-Finally, open 2 separate terminal windows and run the kvserver in one and kvclient in the other.
+Open terminal window for server and run the kvserver:
 
 
 ```node kvserver```
 
 
+Open another terminal for client and run the kvclient:
+
+
 ```node kvclient set waqid w123```
+
+
 ```node kvclient get waqid```
+
+
 ```node kvclient del waqid```
