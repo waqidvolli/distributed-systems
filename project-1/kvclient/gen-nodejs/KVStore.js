@@ -618,4 +618,3 @@ KVStoreProcessor.prototype.process_kvdelete = function(seqid, input, output) {
     });
   }
 }
-
