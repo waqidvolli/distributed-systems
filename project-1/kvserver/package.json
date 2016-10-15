@@ -1,0 +1,14 @@
+{
+  "name": "kvserver",
+  "version": "1.0.0",
+  "description": "Distributed Systems 2016 Project 1",
+  "main": "kvserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Waqid, Rohul",
+  "license": "ISC",
+  "dependencies": {
+    "thrift": "^0.9.3"
+  }
+}

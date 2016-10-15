@@ -1,0 +1,6 @@
+.DS_Store
+project-1/.DS_Store
+project-1/kvclient/.DS_Store
+project-1/kvserver/.DS_Store
+project-1/kvclient/node_modules/*
+project-1/kvserver/node_modules/*
