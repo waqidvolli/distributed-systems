@@ -23,7 +23,12 @@ if(process.argv.length<6 || process.argv.length>7){
         break;
       case 4 :
         action = val;
-        break;
+        if(action=='-get' || action=='-set' || action=='-del'){
+          break;
+        }else{
+          process.stderr.write('Incorrect subcommand. It should be either -get, -set or -del.'+'\n');
+          process.exit(2);
+        }
       case 5 :
         my_key = val;
         break;
