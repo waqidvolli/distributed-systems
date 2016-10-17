@@ -12,7 +12,7 @@ var my_value = null;
 
 //Check if its a valid command
 if(process.argv.length<6 || process.argv.length>7){
-  new Error('Incorrect command. It should be: \nnode kvclient -server [host:port] [subcmd] [my_key] <my_value>');
+  process.stderr.write('Incorrect command. It should be: \nnode kvclient -server [host:port] [subcmd] [my_key] <my_value>'+'\n');
   process.exit(2);
 }else {
   process.argv.forEach(function(val, index, array) {
@@ -41,28 +41,26 @@ var client = thrift.createClient(KVStorage, connection);
 if(action=='-get'){ //If GET command
   client.kvget(my_key, function(err, result) {
     if (err){
-      new Error(err);
+      process.stderr.write(err+'\n');
       process.exit(2);
     } else if(result.error == ttypes.ErrorCode.kError) {
-        new Error(result.errortext);
+        process.stderr.write(result.errortext+'\n');
         process.exit(2);
     } else if(result.error == ttypes.ErrorCode.kSuccess){
-      console.log('\n');
-      console.log('Value: ',result.value);
-      console.log('\n');
-      process.exit(0);
+        process.stdout.write('Value: '+result.value+'\n');
+        process.exit(0);
     } else {
-      new Error(result.errortext);
-      process.exit(1);
+        process.stderr.write(result.errortext+'\n');
+        process.exit(1);
     }
   });
 } else if(action=='-set'){  //If SET command
     client.kvset(my_key, my_value, function(err, result) {
       if (err){
-        new Error(err);
+        process.stderr.write(err+'\n');
         process.exit(2);
       } else if(result.error == ttypes.ErrorCode.kError) {
-          new Error(result.errortext);
+          process.stderr.write(result.errortext+'\n');
           process.exit(2);
       } else {
           process.exit(0);
@@ -71,11 +69,14 @@ if(action=='-get'){ //If GET command
 } else if(action=='-del'){  //If DEL command
   client.kvdelete(my_key, function(err, result) {
     if (err){
-      new Error(err);
+      process.stderr.write(err+'\n');
       process.exit(2);
     } else if(result.error == ttypes.ErrorCode.kError) {
-        new Error(result.errortext);
+        process.stderr.write(result.errortext+'\n');
         process.exit(2);
+    } else if(result.error == ttypes.ErrorCode.kKeyNotFound) {
+          process.stderr.write(result.errortext+'\n');
+          process.exit(1);
     } else {
         process.exit(0);
     }
@@ -84,6 +85,6 @@ if(action=='-get'){ //If GET command
 
 //If an uncaught exception occured such as if the server is not available.
 process.on('uncaughtException', function (err) {
-    new Error(err);
+    process.stderr.write(err+'\n');
     process.exit(2)
 });

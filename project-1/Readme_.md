@@ -34,3 +34,12 @@ node kvserver
 node kvclient -server localhost:3000 -set waqid wmv214
 node kvclient -server localhost:3000 -get waqid
 node kvclient -server localhost:3000 -del waqid
+
+7) To see the process exit code, run:
+
+echo $?
+
+8) Note: If you run a command with insufficient parameters, eg: node kvclient, it will return the following error message:
+
+Incorrect command. It should be:
+node kvclient -server [host:port] [subcmd] [my_key] <my_value>

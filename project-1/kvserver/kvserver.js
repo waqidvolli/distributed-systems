@@ -40,9 +40,15 @@ var server = thrift.createServer(KVStore, {
   kvdelete: function(my_key, result) {
     try{
       console.log("kvdelete: ", my_key);
-      delete items[my_key];
-      var res = new ttypes.Result({value: items[my_key],error: ttypes.ErrorCode.kSuccess, errortext: ''});
-      result(null, res);
+      if(items[my_key]){
+        delete items[my_key];
+        var res = new ttypes.Result({value: items[my_key],error: ttypes.ErrorCode.kSuccess, errortext: ''});
+        result(null, res);
+      }else{
+        var res = new ttypes.Result({value: items[my_key],error: ttypes.ErrorCode.kKeyNotFound, errortext: 'key not found'});
+        result(null, res);
+      }
+
     }catch(err){
       var res = new ttypes.Result({value: null, error: ttypes.ErrorCode.kError, errortext: 'There was an error on the server.'});
       result(null, res);
