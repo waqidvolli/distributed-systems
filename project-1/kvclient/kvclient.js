@@ -6,9 +6,9 @@ var ttypes = require('./gen-nodejs/kvstore_types');
 var connection = thrift.createConnection('localhost', 3000);
 var client = thrift.createClient(KVStorage, connection);
 
-let action = null;
-let my_key = null;
-let my_value = null;
+var action = null;
+var my_key = null;
+var my_value = null;
 
 if(process.argv.length<4 || process.argv.length>5){
   console.log('\n\n');
