@@ -31,6 +31,6 @@ node kvserver
 
 6) Start the client in a separate terminal window with the appropriate parameters:
 
-node kvclient set waqid wmv214
-node kvclient get waqid
-node kvclient del waqid
+node kvclient -server localhost:3000 -set waqid wmv214
+node kvclient -server localhost:3000 -get waqid
+node kvclient -server localhost:3000 -del waqid
