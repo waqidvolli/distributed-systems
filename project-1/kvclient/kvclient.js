@@ -23,7 +23,8 @@ if(process.argv.length<6 || process.argv.length>7){
         break;
       case 4 :
         action = val;
-        if(action=='-get' || action=='-set' || action=='-del'){
+        if(action=='-get' || action=='-set' || action=='-del' ||
+          action=='get' || action=='set' || action=='del'){
           break;
         }else{
           process.stderr.write('Incorrect subcommand. It should be either -get, -set or -del.'+'\n');
@@ -43,7 +44,7 @@ if(process.argv.length<6 || process.argv.length>7){
 var connection = thrift.createConnection(host, port);
 var client = thrift.createClient(KVStorage, connection);
 
-if(action=='-get'){ //If GET command
+if(action=='-get' || action=='get'){ //If GET command
   client.kvget(my_key, function(err, result) {
     if (err){
       process.stderr.write(err+'\n');
@@ -59,7 +60,7 @@ if(action=='-get'){ //If GET command
         process.exit(1);
     }
   });
-} else if(action=='-set'){  //If SET command
+} else if(action=='-set' || action=='set'){  //If SET command
     client.kvset(my_key, my_value, function(err, result) {
       if (err){
         process.stderr.write(err+'\n');
@@ -71,7 +72,7 @@ if(action=='-get'){ //If GET command
           process.exit(0);
       }
     });
-} else if(action=='-del'){  //If DEL command
+} else if(action=='-del' || action=='del'){  //If DEL command
   client.kvdelete(my_key, function(err, result) {
     if (err){
       process.stderr.write(err+'\n');
